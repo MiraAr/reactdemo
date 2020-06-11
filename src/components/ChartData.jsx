@@ -42,13 +42,13 @@ export default function ChartData(props) {
 
     return (
       <ScatterPlot
-      data= {chartData}
-      width= {width}
-      height= {height}
-      margins= {margins}
-      chartSeries= {chartSeries}
-      x= {x}
-      xScale= {xScale}
+      data={chartData}
+      width={width}
+      height={height}
+      margins={margins}
+      chartSeries={chartSeries}
+      x={x}
+      xScale={xScale}
     />
   );
 }

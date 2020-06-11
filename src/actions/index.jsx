@@ -1,4 +1,4 @@
-import {URL_LIST,URL_SEARCH, URL_DETAIL, URL_PERSON, URL_CAST, URL_VIDEO, API_KEY, API_KEY_ALT} from '../const';
+import {URL_LIST,URL_SEARCH, URL_DETAIL, URL_PERSON, URL_CAST, URL_VIDEO,URL_RECOMMENDATIONS, API_KEY, API_KEY_ALT} from '../const';
 // action types
 export const SEARCH_MOVIE = 'SEARCH_MOVIE';
 export const SEARCH_MOVIE_SUCCESS = 'SEARCH_MOVIE_SUCCESS';
@@ -18,6 +18,10 @@ export const FETCH_CASTS_FAILURE = 'FETCH_CASTS_FAILURE';
 export const FETCH_TRAILERS = 'FETCH_TRAILERS';
 export const FETCH_TRAILERS_SUCCESS = 'FETCH_TRAILERS_SUCCESS';
 export const FETCH_TRAILERS_FAILURE = 'FETCH_TRAILERS_FAILURE';
+export const FETCH_RECOMMENDATIONS = 'FETCH_RECOMMENDATIONS';
+export const  FETCH_RECOMMENDATIONS_SUCCESS= ' FETCH_RECOMMENDATIONS_SUCCESS';
+export const FETCH_RECOMMENDATIONS_FAILURE = 'FETCH_RECOMMENDATIONS_FAILURE';
+
 
 function searchMovie(searchText) {
   return {
@@ -135,6 +139,7 @@ function fetchTrailersFail(error) {
   };
 }
 
+
 export function searchMovieList(keyword){
   let url = URL_SEARCH + keyword + API_KEY_ALT;
   return function(dispatch){
@@ -208,5 +213,38 @@ export function fetchTrailerList(id){
         });
         dispatch(fetchTrailersSuccess(youtubeTrailers));
       }).catch(error => dispatch(fetchTrailersFail(error)))
+  }
+}
+
+function fetchRecommendations() {
+  return {
+    type: FETCH_RECOMMENDATIONS
+  };
+}
+
+
+function fetchRecommendationsSuccess(data) {
+  return {
+    type: FETCH_RECOMMENDATIONS_SUCCESS,
+    data
+  };
+}
+
+function fetchRecommendationsFail(error) {
+  return {
+    type: FETCH_RECOMMENDATIONS_FAILURE,
+    error
+  };
+}
+
+export function fetchRecommendationList(id){
+  const url_recommendations = URL_DETAIL + id + URL_RECOMMENDATIONS + API_KEY;
+  return function(dispatch){
+    dispatch(fetchRecommendations())
+    return fetch(url_recommendations)
+      .then(response => response.json())
+      .then(json => json.results)
+      .then(data => dispatch(fetchRecommendationsSuccess(data)))
+      .catch(error => dispatch(fetchRecommendationsFail(error)))
   }
 }

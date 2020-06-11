@@ -1,17 +1,14 @@
 import React from 'react'
 import Trailer from './Trailer'
-import { Col } from 'react-bootstrap'
 
 export default function TrailerList({data}) {
     let trailers = data.map(function(trailer) {
       return(
-        <Col xs={12} sm={6} md={4} key={trailer.id} >
-          <Trailer trailer={trailer.key} />
-        </Col>
-      );
+      	<Trailer trailer={trailer.id} key={trailer.id}/>
+	 
+     );
     });
-
-    const style = {
+	const style = {
       marginTop: '15px'
     };
 
@@ -29,3 +26,8 @@ export default function TrailerList({data}) {
     } else
       return null;
 }
+
+
+
+
+

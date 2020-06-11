@@ -77,7 +77,7 @@ class SearchBar extends Component {
   renderSuggestion = (suggestion) => {
     return (
       <div>
-      <img alt="" className="searchResult-image" src= {suggestion.img == null ? logo: URL_IMG+IMG_SIZE_XSMALL+suggestion.img } />
+      <img alt="" className="searchResult-image" src={suggestion.img == null ? logo: URL_IMG+IMG_SIZE_XSMALL+suggestion.img } />
         <div className="searchResult-text">
           <div className="searchResult-name">
             {suggestion.title}

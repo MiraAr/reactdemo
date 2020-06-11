@@ -14,6 +14,7 @@ class StarDetail extends Component {
   }
 
   render() {
+    console.log(this.props)
     const {star, movies} = this.props;
 
     if(star.hasOwnProperty('id')) {
